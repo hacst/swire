@@ -6,6 +6,17 @@ Protocol description based on [TLSRPGM documentation](https://github.com/pvvx/TL
 
 **Note:** This decoder has received very limited testing. Verify results before relying on them.
 
+## Decoder Output
+
+![Example swire decoder output](doc/swire-decode-example.png)
+
+| Row | Annotations |
+|-----|-------------|
+| Bits | Individual bits (CMD bit highlighted) |
+| Bytes | Hex values |
+| Master | START, ADDR, R/W, write data, triggers, END, errors |
+| Slave | Read data |
+
 ## Installation
 
 Copy the `swire` folder to your [PulseView decoders](https://sigrok.org/wiki/Protocol_decoders) directory:
@@ -37,15 +48,6 @@ Restart PulseView after installation.
 | Bit rate | 960000 | SWire clock rate in bits/second |
 | Address bytes | 3 | Address width: 3 for TLSR825x (24-bit), 2 for TLSR826x (16-bit) |
 
-## Decoder Output
-
-| Row | Annotations |
-|-----|-------------|
-| Bits | Individual bits (CMD bit highlighted) |
-| Bytes | Hex values |
-| Master | START, ADDR, R/W, write data, triggers, END, errors |
-| Slave | Read data |
-
 ## Recommended Sample Frequency
 
 - 960 kbps: 20 MHz minimum
@@ -62,8 +64,8 @@ SWire is a single-wire half-duplex protocol with pull-up resistor (idle HIGH).
 - Bit 1: 4 units LOW, 1 unit HIGH
 
 **Frame structure:**
-- Master bytes: CMD (1 bit) + DATA (8 bits) + END unit = 10 pulses
-- Slave bytes: DATA (8 bits) + END unit = 9 pulses (no CMD bit)
+- Master bytes: CMD (1 bit) + DATA (8 bits) + END unit
+- Slave bytes: DATA (8 bits) + END unit (no CMD bit)
 
 **Transaction:**
 ```
